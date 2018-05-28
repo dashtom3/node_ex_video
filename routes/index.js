@@ -18,10 +18,17 @@ router.get('/', function(req, res, next) {
   // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   // console.log(option)
   console.log(params)
-  request({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid',
-    method:"POST",
-    json:true,
-    body:JSON.stringify(params)
+  // request({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid',
+  //   method:"POST",
+  //   json:true,
+  //   body:JSON.stringify(params)
+  // },function(error,response,body){
+  //   console.log(response)
+  //   console.log(body)
+  //   // res.render('index', { title: res });
+  // })
+  request.post({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid',
+    form:params
   },function(error,response,body){
     console.log(response)
     console.log(body)
