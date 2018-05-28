@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
   //   console.log(body)
   //   // res.render('index', { title: res });
   // })
-  request.post({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid',
+  request.post({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid',
     form:params
   },function(error,response,body){
     console.log(response)
