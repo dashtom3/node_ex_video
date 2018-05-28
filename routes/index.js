@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
   var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   http.request(option,function(res){
     console.log(res)
+    res.render('index', { title: res });
   })
 });
 
