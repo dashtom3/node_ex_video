@@ -18,8 +18,15 @@ router.get('/', function(req, res, next) {
   var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   console.log(option)
   http.request(option,function(res){
-    console.log(res)
-    res.render('index', { title: res });
+    res.setEncoding('utf8');
+    res.on('data', (chunk) => {
+                console.log(`BODY: ${chunk}`);
+    });
+    res.on('end', () => {
+                console.log('No more data in response.');
+    });
+    // console.log(res)
+    // res.render('index', { title: res });
   })
 });
 
