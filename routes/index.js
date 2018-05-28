@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   var temp = url + JSON.stringify(params) + secret
   hash = crypto.createHash('md5');
   hash.update(temp)
-  params.token = hash.digest('hex')
+  // params.token = hash.digest('hex')
   // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   // console.log(option)
   console.log(params)
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
   //   console.log(body)
   //   // res.render('index', { title: res });
   // })
-  request.post({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid',
+  request.post({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
     form:params
   },function(error,response,body){
     console.log(response)
