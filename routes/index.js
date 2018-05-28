@@ -1,5 +1,5 @@
 var express = require('express');
-var http =require('http')
+var request =require('request')
 var router = express.Router();
 const appKey = "72d77b4a";
 const secret = "44e7464a4df7443a8798d8c42661c606";
@@ -15,17 +15,16 @@ router.get('/', function(req, res, next) {
   hash = crypto.createHash('md5');
   hash.update(temp)
   params.token = hash.digest('hex')
-  var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
-  console.log(option)
-  http.request(option,function(res){
-    res.setEncoding('utf8');
-    res.on('data', (chunk) => {
-                console.log(`BODY: ${chunk}`);
-    });
-    res.on('end', () => {
-                console.log('No more data in response.');
-    });
-    // console.log(res)
+  // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
+  // console.log(option)
+  console.log(params)
+  request({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid',
+    method:"POST",
+    json:true,
+    body:JSON.stringify(params)
+  },function(error,response,body){
+    console.log(response)
+    console.log(body)
     // res.render('index', { title: res });
   })
 });
