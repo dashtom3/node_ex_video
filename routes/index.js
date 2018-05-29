@@ -3,6 +3,7 @@ var request =require('request')
 var router = express.Router();
 const appKey = "72d77b4a";
 const secret = "44e7464a4df7443a8798d8c42661c606";
+const opUserUuid = "0be83d40695011e7981e0f190ed6d2e7";
 const crypto = require('crypto');
 var hash = crypto.createHash('md5');
 
@@ -18,6 +19,10 @@ router.get('/', function(req, res, next) {
   // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   // console.log(option)
   console.log(params)
+  // "page":0,
+  // "pageSize":300,
+  // "opUserUuid":"0be83d40695011e7981e0f190ed6d2e7"
+
   // request({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
   //   method:"POST",
   //   json:true,
