@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
   // console.log(option)
   console.log(params)
-  request({url:'http://10.0.0.30:80/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
+  request({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
     method:"POST",
     json:true,
     body:JSON.stringify(params)
