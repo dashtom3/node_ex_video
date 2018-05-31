@@ -30,9 +30,10 @@ router.get('/', function(req, res, next) {
   request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+token,
     method:"POST",
     json:true,
-    headers: {
-      'Content-Type':'application/json'
-    },
+    headers: [{
+      name:'content-type',
+      value:'application/json'
+    }],
     body:JSON.stringify(params)
   },function(error,response,body){
     console.log(response)
