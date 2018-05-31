@@ -16,39 +16,43 @@ router.get('/', function(req, res, next) {
   var temp = url + JSON.stringify(params) + secret
   hash = crypto.createHash('md5');
   hash.update(temp)
-  // params.token = hash.digest('hex')
-  // var option = {hostname: '10.0.0.30',port:80,path:url,method:'POST',data:params}
-  // console.log(option)
   console.log(params)
-  console.log(JSON.stringify(params))
   var token = hash.digest('hex')
   console.log(token)
-  // "page":0,
-  // "pageSize":300,
-  // "opUserUuid":"0be83d40695011e7981e0f190ed6d2e7"
-  // console.log(hash.digest('hex'))
-  request({url:'http://10.0.0.30:80/openapi/service/vss/res/getCameras?token='+token,
+  request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+token,
     method:"POST",
     json:true,
-    headers: {
-      'content-type':'application/json'
-    },
-    //data:params,
-    body:JSON.stringify(params)
+    body:params
+  },function(error,response,body){
+    console.log(response)
+    console.log(body)
+    var temp2 = ''
+    body.data.list.forEach(function(item){
+      temp2 = temp2 + item.encoderUuid+","
+    })
+    temp2 = temp2.substr(0,temp2.length-2)
+    getIP(temp2)
+    // res.render('index', { title: res });
+  })
+});
+function getIP(encoderUUids){
+  console.log("11")
+  var params =  {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400,"encoderUuids":encoderUUids}
+  var url = '/openapi/service/vss/res/getEncoders'
+  var temp = url + JSON.stringify(params) + secret
+  hash.update(temp)
+  var token = hash.digest('hex')
+  console.log(token)
+  request({url:'http://10.0.0.30/openapi/service/vss/res/getEncoders?token='+token,
+    method:"POST",
+    json:true,
+    body:params
   },function(error,response,body){
     console.log(response)
     console.log(body)
     // res.render('index', { title: res });
   })
-  // request.post({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+hash.digest('hex'),
-  //   form:params
-  // },function(error,response,body){
-  //   console.log(response)
-  //   console.log(body)
-  //   // res.render('index', { title: res });
-  // })
-});
-
+}
 module.exports = router;
 
 
