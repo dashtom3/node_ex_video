@@ -27,13 +27,13 @@ router.get('/', function(req, res, next) {
   // "pageSize":300,
   // "opUserUuid":"0be83d40695011e7981e0f190ed6d2e7"
   // console.log(hash.digest('hex'))
-  request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+token,
+  request({url:'http://10.0.0.30:80/openapi/service/vss/res/getCameras?token='+token,
     method:"POST",
     json:true,
-    headers: [{
-      name:'content-type',
-      value:'application/json'
-    }],
+    headers: {
+      'content-type':'application/json'
+    },
+    //data:params,
     body:JSON.stringify(params)
   },function(error,response,body){
     console.log(response)
