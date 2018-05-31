@@ -10,7 +10,7 @@ var hash = crypto.createHash('md5');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  var params = {appkey: appKey,time: new Date().getTime(),opUserUuid:opUserUuid,pageNo:1,pageSize:400}
+  var params = {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400}
   // var url = '/openapi/service/base/user/getDefaultUuid'
   var url = '/openapi/service/vss/res/getCameras'
   var temp = url + JSON.stringify(params) + secret
