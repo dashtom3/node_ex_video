@@ -24,22 +24,22 @@ router.get('/', function(req, res, next) {
   // "pageSize":300,
   // "opUserUuid":"0be83d40695011e7981e0f190ed6d2e7"
 
-  request({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
-    method:"POST",
-    json:true,
-    body:JSON.stringify(params)
-  },function(error,response,body){
-    console.log(response)
-    console.log(body)
-    // res.render('index', { title: res });
-  })
-  // request.post({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
-  //   form:params
+  // request({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
+  //   method:"POST",
+  //   json:true,
+  //   body:JSON.stringify(params)
   // },function(error,response,body){
   //   console.log(response)
   //   console.log(body)
   //   // res.render('index', { title: res });
   // })
+  request.post({url:'http://10.0.0.30/openapi/service/base/user/getDefaultUuid?token='+hash.digest('hex'),
+    form:params
+  },function(error,response,body){
+    console.log(response)
+    console.log(body)
+    // res.render('index', { title: res });
+  })
 });
 
 module.exports = router;
