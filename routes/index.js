@@ -23,23 +23,23 @@ router.get('/', function(req, res, next) {
   // "page":0,
   // "pageSize":300,
   // "opUserUuid":"0be83d40695011e7981e0f190ed6d2e7"
-
-  request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+hash.digest('hex'),
-    method:"POST",
-    json:true,
-    body:JSON.stringify(params)
-  },function(error,response,body){
-    console.log(response)
-    console.log(body)
-    // res.render('index', { title: res });
-  })
-  // request.post({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+hash.digest('hex'),
-  //   form:params
+  console.log(hash.digest('hex'))
+  // request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+hash.digest('hex'),
+  //   method:"POST",
+  //   json:true,
+  //   body:JSON.stringify(params)
   // },function(error,response,body){
   //   console.log(response)
   //   console.log(body)
   //   // res.render('index', { title: res });
   // })
+  request.post({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+hash.digest('hex'),
+    form:params
+  },function(error,response,body){
+    console.log(response)
+    console.log(body)
+    // res.render('index', { title: res });
+  })
 });
 
 module.exports = router;
