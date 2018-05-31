@@ -40,6 +40,7 @@ function getIP(encoderUUids){
   var params =  {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400,"encoderUuids":encoderUUids}
   var url = '/openapi/service/vss/res/getEncoders'
   var temp = url + JSON.stringify(params) + secret
+  var hash = crypto.createHash('md5');
   hash.update(temp)
   var token = hash.digest('hex')
   console.log(token)
