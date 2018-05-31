@@ -19,32 +19,33 @@ router.get('/', function(req, res, next) {
   console.log(params)
   var token = hash.digest('hex')
   console.log(token)
-  request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+token,
-    method:"POST",
-    json:true,
-    body:params
-  },function(error,response,body){
-    console.log(response)
-    console.log(body)
-    var temp2 = ''
-    body.data.list.forEach(function(item){
-      temp2 = temp2 + item.encoderUuid+","
-    })
-    temp2 = temp2.substr(0,temp2.length-2)
-    getIP(temp2)
-    // res.render('index', { title: res });
-  })
+  getIP();
+  // request({url:'http://10.0.0.30/openapi/service/vss/res/getCameras?token='+token,
+  //   method:"POST",
+  //   json:true,
+  //   body:params
+  // },function(error,response,body){
+  //   console.log(response)
+  //   console.log(body)
+  //   var temp2 = ''
+  //   body.data.list.forEach(function(item){
+  //     temp2 = temp2 + item.encoderUuid+","
+  //   })
+  //   temp2 = temp2.substr(0,temp2.length-2)
+  //   getIP(temp2)
+  //   // res.render('index', { title: res });
+  // })
 });
-function getIP(encoderUUids){
+function getIP(){
   console.log("11")
-  var params =  {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400,"encoderUuids":encoderUUids}
-  var url = '/openapi/service/vss/res/getEncoders'
+  var params =  {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400}
+  var url = '/openapi/service/vss/res/getEncoderDevicesEx'
   var temp = url + JSON.stringify(params) + secret
   var hash = crypto.createHash('md5');
   hash.update(temp)
   var token = hash.digest('hex')
   console.log(token)
-  request({url:'http://10.0.0.30/openapi/service/vss/res/getEncoders?token='+token,
+  request({url:'http://10.0.0.30/openapi/service/vss/res/getEncoderDevicesEx?token='+token,
     method:"POST",
     json:true,
     body:params
