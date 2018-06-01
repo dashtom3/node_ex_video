@@ -32,11 +32,11 @@ router.get('/', function(req, res, next) {
       temp2 = temp2 + item.encoderUuid+","
     })
     temp2 = temp2.substr(0,temp2.length-2)
-    getIPByUUID(temp2)
+    getIPByUUID(temp2,body.data.list)
     // res.render('index', { title: res });
   })
 });
-function getIPByUUID(uuids){
+function getIPByUUID(uuids,listData){
   console.log("11")
   var params =  {"appkey": appKey,"time": new Date().getTime(),"opUserUuid":opUserUuid,"pageNo":1,"pageSize":400,"encoderUuids":uuids}
   var url = '/openapi/service/vss/res/getEncoderDevicesByUuidsEx'
@@ -52,6 +52,17 @@ function getIPByUUID(uuids){
   },function(error,response,body){
     console.log(response)
     console.log(body)
+    var temp = {}
+    body.data.forEach(function(item){
+      var temp1 = []
+      listData.forEach(function(item1){
+        if(item1.encoderUuid == item.encoderUuid){
+          temp1.push(item1.cameraUuid)
+        }
+      })
+      temp[item.encoderName] = temp1
+    })
+    console.log(temp)
     // res.render('index', { title: res });
   })
 }
@@ -76,7 +87,23 @@ function getIP(){
 }
 module.exports = router;
 
-
+// 1:Object {encoderUuid: "4b0baf4abba447d681b1a8432cca1847", encoderName: "Network Video Recorder", encoderModel: 134742528, …}
+// alarmIn:0
+// alarmOut:0
+// devType:2214
+// encoderIp:"10.1.129.30"
+// encoderModel:134742528
+// encoderName:"Network Video Recorder"
+// encoderPort:8000
+// encoderUserName:"admin"
+// encoderUuid:"4b0baf4abba447d681b1a8432cca1847"
+// orderNum:null
+// resAuths:"1,2"
+// smartSupport:0
+// smartType:""
+// unitUuid:"1048576"
+// updateTime:0
+// visIntercomChanNum:null
 // {
 //     "errorCode":0,
 //     "errorMessage":null,
