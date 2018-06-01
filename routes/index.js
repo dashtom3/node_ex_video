@@ -62,7 +62,7 @@ function getIPByUUID(uuids,listData){
       })
       temp[item.encoderName] = temp1
     })
-    console.log(temp)
+    console.log(JSON.stringify(temp))
     return temp
   })
 }
