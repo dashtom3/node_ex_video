@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
     })
     temp2 = temp2.substr(0,temp2.length-2)
 
-    res.render('index', { title: getIPByUUID(temp2,body.data.list) });
+    res.render('index', { title: JSON.stringify(getIPByUUID(temp2,body.data.list)) });
   })
 });
 function getIPByUUID(uuids,listData){
