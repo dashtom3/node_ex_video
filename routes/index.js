@@ -32,8 +32,8 @@ router.get('/', function(req, res, next) {
       temp2 = temp2 + item.encoderUuid+","
     })
     temp2 = temp2.substr(0,temp2.length-2)
-    getIPByUUID(temp2,body.data.list)
-    // res.render('index', { title: res });
+
+    res.render('index', { title: getIPByUUID(temp2,body.data.list) });
   })
 });
 function getIPByUUID(uuids,listData){
@@ -63,7 +63,7 @@ function getIPByUUID(uuids,listData){
       temp[item.encoderName] = temp1
     })
     console.log(temp)
-    res.render('index', { title: temp });
+    return temp
   })
 }
 function getIP(){
